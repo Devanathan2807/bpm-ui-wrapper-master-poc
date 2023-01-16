@@ -61,6 +61,4 @@ import { CommonModule } from '@angular/common';
     CUSTOM_ELEMENTS_SCHEMA
   ]
 })
-export class AppModule {
-  
- }
+export class AppModule { }

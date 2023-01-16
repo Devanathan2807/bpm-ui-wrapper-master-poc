@@ -130,17 +130,18 @@ export class HomePageComponent implements OnInit {
     //call the service
     if(this.postRequestMsg!=null){
     this.TaskService.completeTask(this.postRequestMsg,this.approvalStatus).subscribe(res=>{
-      alert(res.postStatus);
+      
       this.postStatus=res.postStatus;
     });
     console.log(this.postStatus);
+    alert(this.postStatus);
     this.ApprovalMsg.forEach(v=>{
       this.ApprovalMsg.splice(1);
     });
     console.log(this.ApprovalMsg);
   }
+   window.location.reload();
   
-  window.location.reload();
   }
 
  
@@ -200,18 +201,18 @@ export class HomePageComponent implements OnInit {
 
 export interface DialogData {
   camVariable:CamundaVariables[];
-  source:any;
+  source: any[];
+ 
 }
 
 
 @Component({
   selector: 'app-home-page.dialogue',
   templateUrl: './home-page.dialogue.component.html'
-  
 }
 )
 export class DialogOverviewExampleDialog implements OnInit {
-
+  
   displayedColumns = ['camundaVariableName', 'camundaVariableValue'];
   displayNoSignUp: any
   constructor(
@@ -220,7 +221,7 @@ export class DialogOverviewExampleDialog implements OnInit {
     this.dialogRef.close();
   }
  ngOnInit() {
-    this.data.source=new MatTableDataSource(this.data.camVariable);
+    this.data.source=this.data.camVariable;
     console.log(this.data.source);
  }
 }

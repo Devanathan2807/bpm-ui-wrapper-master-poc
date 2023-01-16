@@ -1,0 +1,27 @@
+<div class="example-container">
+  <img mat-card-image
+    src="/assets/images/incedoLogo.png"
+    alt="Incedo Logo">
+  <form class="example-form">
+    <mat-grid-list cols="1">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>User Name</mat-label>
+        <input matInput placeholder="Enter your name" name="usename" [(ngModel)]="username">
+      </mat-form-field>
+    </mat-grid-list>
+    <mat-grid-list cols="1">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter your password" value="" name="password" type="password"
+          [(ngModel)]="password">
+      </mat-form-field>
+    </mat-grid-list> 
+    <mat-grid-list cols="1">
+      <button mat-raised-button color="warn"  class="logIn" (click)="submit()">Log In</button>
+    </mat-grid-list>
+    <mat-grid-list cols="2">
+      <button mat-button color="warn" class="signUp" (click)="signup()">SignUp</button>
+      <button mat-button color="warn" (click)="forgotPassword()">Forgot Password?</button>
+    </mat-grid-list>  
+  </form>
+</div>

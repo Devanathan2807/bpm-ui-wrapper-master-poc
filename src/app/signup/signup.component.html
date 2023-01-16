@@ -1,0 +1,24 @@
+<div class="content">
+    <form class="example-form">
+        <mat-card>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="Enter your first name" name="firstName" [(ngModel)]="firstName">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Enter your last name" value="" name="lastName" type="lastName"
+                    [(ngModel)]="lastName">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>User Name</mat-label>
+                <input matInput placeholder="Enter your user name" name="userName" [(ngModel)]="userName">
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Enter your password" name="password" type="password" [(ngModel)]="password">
+            </mat-form-field>
+            <button mat-raised-button color="warn" (click)="submit()">Submit</button>
+        </mat-card>
+    </form>
+</div>

@@ -1,0 +1,101 @@
+<div>
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+      <ng-container matColumnDef="definitionKey">
+        <th mat-header-cell *matHeaderCellDef>Definition Key</th>
+        <td mat-cell *matCellDef="let element">{{element.definitionKey}}</td>
+      </ng-container>
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="definitionId">
+        <th mat-header-cell *matHeaderCellDef>Definition Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.definitionId}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Process Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="version">
+        <th mat-header-cell *matHeaderCellDef>version</th>
+        <td mat-cell *matCellDef="let element"> {{element.version}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="versionTag">
+        <th mat-header-cell *matHeaderCellDef>versionTag</th>
+        <td mat-cell *matCellDef="let element"> {{element.versionTag}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="startProcess">
+        <th mat-header-cell *matHeaderCellDef> Start Process </th>
+        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn"
+            (click)="getRecord(element.definitionId)">Get Details</button> </td>
+      </ng-container>
+  
+  
+      <tr class="header-row" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+  
+    </table>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+
+      <ng-container matColumnDef="taskTitle">
+        <th mat-header-cell *matHeaderCellDef>Task Title</th>
+        <td mat-cell *matCellDef="let element">{{element.taskTitle}}</td>
+      </ng-container>
+      <!-- Position Column -->
+      <ng-container matColumnDef="taskCreatedTime">
+        <th mat-header-cell *matHeaderCellDef>TaskCreated Time</th>
+        <td mat-cell *matCellDef="let element"> {{element.taskCreatedTime}} </td>
+      </ng-container>
+  
+      <!-- Weight Column-->
+      <ng-container matColumnDef="ownerName">
+        <th mat-header-cell *matHeaderCellDef>Owner Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.ownerName}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="dueDate">
+        <th mat-header-cell *matHeaderCellDef>Due Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef>Priority</th>
+        <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+      </ng-container> -->
+  
+      <ng-container matColumnDef="startProcess">
+        <th mat-header-cell *matHeaderCellDef> Start Process </th>
+        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn"
+            (click)="getRecord(element.definitionId)">Get Details</button> </td>
+      </ng-container>
+  
+  
+       <tr class="header-row" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+  </div>

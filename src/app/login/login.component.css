@@ -1,0 +1,29 @@
+.example-container mat-form-field+mat-form-field {
+  text-align: center;
+  width: auto;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+.example-full-width{
+  width: 100%;
+}
+
+.example-form {
+  text-align: center;
+}
+
+.logIn{
+  width: 100%;
+}
+
+.signUp{
+  margin-right: 20px;
+}

@@ -1,0 +1,29 @@
+<!-- {{source.filteredData[0].camundaVariableName}}
+
+<div *ngFor="let camVar of CamVariableList.filteredData">
+{{camVar.camundaVariableName}}
+</div> -->
+<div mat-dialog-content>
+<table class="mat-elevation-z8" mat-table [dataSource]="source">
+  
+  <ng-container matColumnDef="camundaVariableName">
+   
+    <td mat-cell *matCellDef="let element">{{element.camundaVariableName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="camundaVariableValue">
+ 
+    <td mat-cell *matCellDef="let element"> {{element.camundaVariableValue}} </td>
+  </ng-container>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter </td>
+  </tr>
+</table>
+<ion-footer>
+  <button type="button" style="position: -webkit-sticky;
+  position: sticky; bottom: 0%; float: right; width: 25%; height: 35px;background-color: #3498db " (click)="Approve()" (click)="completeTask()">Approve</button>
+  <button type="button" style="position: -webkit-sticky;
+  position: sticky; bottom: 0%; width: 25%; height: 35px;background-color: #f53d3d;" (click)="Reject()" (click)="completeTask()">Reject</button>
+  </ion-footer>
+</div>

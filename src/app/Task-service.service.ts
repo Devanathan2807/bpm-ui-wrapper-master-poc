@@ -9,7 +9,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 })
 export class TaskService{
 
-  private serviceUrl = 'http://localhost:8080/request/list';
+  private serviceUrl = 'http://localhost:8082/request/list';
   myData: any;
   constructor(private http: HttpClient) { }
 
@@ -18,15 +18,16 @@ export class TaskService{
       'Content-Type': 'application/json'
     });
     const requestOptions = { headers: headers };
-    return this.http.get<TaskListModel[]>('http://localhost:8080/custom/usertask', requestOptions);
+    return this.http.get<TaskListModel[]>('http://localhost:8082/custom/usertask', requestOptions);
   }
-  getApprovalTaskList(){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    const requestOptions = { headers: headers };
-    return this.http.get<TaskListModel[]>('http://localhost:8080/custom/TaskApproval', requestOptions);
-  }
+  
+  // getApprovalTaskList(){
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json'
+  //   });
+  //   const requestOptions = { headers: headers };
+  //   return this.http.get<TaskListModel[]>('http://localhost:8082/custom/TaskApproval', requestOptions);
+  // }
 
   completeTask(requestbody:any,approvalStatus:any){
     const headers = new HttpHeaders({
@@ -35,7 +36,7 @@ export class TaskService{
     let params= new HttpParams();
     params=params.append('approvalStatus',approvalStatus)
     const requestOptions = { headers: headers ,params: params};
-    return this.http.post<any>('http://localhost:8080/custom/completetask',requestbody,requestOptions);
+    return this.http.post<any>('http://localhost:8082/custom/completetask',requestbody,requestOptions);
   }
 
 

@@ -1,31 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Injectable, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProcessDefinationModel } from '../models/ProcessDefinationModel';
 import { ProcessDefinationServiceService } from '../process-defination-service.service';
 import { TaskService } from '../Task-service.service';
 import { TaskListModel } from '../models/TaskListModel';
 import { CamundaVariables } from '../models/CamundaVariables';
-import { Call, ReadVarExpr } from '@angular/compiler';
+import { Call, ReadVarExpr, ThisReceiver } from '@angular/compiler';
 import { Data, Router } from '@angular/router';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HttpClient,HttpHeaders, JsonpInterceptor } from '@angular/common/http';
-import { isEmpty } from 'rxjs';
-import { __values } from 'tslib';
 import { NgForm } from '@angular/forms';
+import { MatTableDataSourcePaginator } from '@angular/material/table';
+import { CamundaDialogueModelComponent } from '../camunda-dialogue-model/camunda-dialogue-model.component';
+import { BehaviorSubject } from 'rxjs';
+import { DataService } from '../DataService';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
-  
+  styleUrls: ['./home-page.component.css'],
 }
 )
 
 export class HomePageComponent implements OnInit {
 
-
+  // @Output() msgToSibling = new EventEmitter<any>()
+  
   dataSource: any
   source: any
   approvalStatus:string="";
@@ -43,7 +45,7 @@ export class HomePageComponent implements OnInit {
 
   
 
-  constructor(private processDefinationService: ProcessDefinationServiceService,public dialog: MatDialog, private router: Router,private TaskService:TaskService,private http: HttpClient) {
+  constructor(private processDefinationService: ProcessDefinationServiceService,public dialog: MatDialog, private router: Router,private TaskService:TaskService,private http: HttpClient,private DataService:DataService) {
     
   }
 
@@ -51,7 +53,7 @@ export class HomePageComponent implements OnInit {
   TaskList(){
     this.displayedColumns = ['checkSelect','taskTitle', 'taskCreatedTime', 'ownerName','camundaVariables','getTask'];
     this.a=false;
-    this.b=true;
+    this.b=false;
   }
  ProcessList(){
   this.displayedColumns=['definitionId', 'definitionKey', 'name', 'version', 'versionTag','startProcess'];
@@ -130,18 +132,17 @@ export class HomePageComponent implements OnInit {
     //call the service
     if(this.postRequestMsg!=null){
     this.TaskService.completeTask(this.postRequestMsg,this.approvalStatus).subscribe(res=>{
-      
+      alert(res.postStatus);
       this.postStatus=res.postStatus;
     });
     console.log(this.postStatus);
-    alert(this.postStatus);
     this.ApprovalMsg.forEach(v=>{
       this.ApprovalMsg.splice(1);
     });
     console.log(this.ApprovalMsg);
   }
-   window.location.reload();
   
+   window.location.reload();
   }
 
  
@@ -151,19 +152,17 @@ export class HomePageComponent implements OnInit {
   }
 
   //call model dialogur box
-  getRecord1(e:CamundaVariables[]){
-    // e.forEach(v=>{
-    //   console.log("Camunda Variable Name : "+v.camundaVariableName+"\n"+"Camunda Variable Value : "+v.camundaVariableValue+"\n");
-    // }
-    // )
-
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-        width: '700px',
-      data: {camVariable : e}
+  getRecord1(e: any,e1:any,TaskDef:string,TaskCreatedTime:String,msg:any){
+       
+    this.DataService.setProduct(e);
+     e1.target.checked=true;
+     this.GetSelected(e1,TaskDef,TaskCreatedTime,msg);
+     this.DataService.setApprovalTaskDetail(this.ApprovalMsg);
+    const dialogRef = this.dialog.open(CamundaDialogueModelComponent, {
+        width: '60%',
       });
-    
+      // this.router.navigateByUrl('/camundaDialogueModeule');
   }
-
 
   GetSelected(e:any,TaskDef:string,TaskCreatedTime:String,msg:any){
     msg=""
@@ -174,10 +173,12 @@ export class HomePageComponent implements OnInit {
    const index: number = this.ApprovalMsg.indexOf(msg);
    if (index !== -1)
    this.find=true;
+
    if(this.ApprovalMsg==null)
    this.find=false;
 
    this.lastIndexApprovalMsg=msg;
+
    if(status)
    {
    if(this.find==false)
@@ -189,39 +190,16 @@ export class HomePageComponent implements OnInit {
         this.ApprovalMsg.splice(index, 1);
     }      
    }
+   if(this.ApprovalMsg.length>1)
+   this.b=true;
+   else
+   this.b=false;
    console.log(this.ApprovalMsg);
   }
 
- 
-
 }
 
 
 
 
-export interface DialogData {
-  camVariable:CamundaVariables[];
-  source: any[];
- 
-}
 
-
-@Component({
-  selector: 'app-home-page.dialogue',
-  templateUrl: './home-page.dialogue.component.html'
-}
-)
-export class DialogOverviewExampleDialog implements OnInit {
-  
-  displayedColumns = ['camundaVariableName', 'camundaVariableValue'];
-  displayNoSignUp: any
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
- ngOnInit() {
-    this.data.source=this.data.camVariable;
-    console.log(this.data.source);
- }
-}

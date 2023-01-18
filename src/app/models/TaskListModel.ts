@@ -9,5 +9,5 @@ export class TaskListModel {
   ownerName: string = "";
   taskCreatedTime: string = "";
   postStatus: string="";
-  camundaVariables = <CamundaVariables> {}; 
+  camundaVariables = new Array<CamundaVariables>(); 
   }

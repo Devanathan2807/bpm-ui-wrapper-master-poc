@@ -25,6 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CamundaDialogueModelComponent } from './camunda-dialogue-model/camunda-dialogue-model.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,8 +34,7 @@ import { CommonModule } from '@angular/common';
     HomePageComponent,
     ProcessComponent,
     TaskComponent,
-    
-    
+    CamundaDialogueModelComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,4 +61,6 @@ import { CommonModule } from '@angular/common';
     CUSTOM_ELEMENTS_SCHEMA
   ]
 })
-export class AppModule { }
+export class AppModule {
+  
+ }
